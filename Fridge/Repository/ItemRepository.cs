@@ -17,11 +17,14 @@ namespace Fridge.Repository
             this._context = context;
         }
 
+        //-------------------------------------------------------------DB Access Methodes
         public async Task<List<Item>> GetItems()
         {
             return await _context.Item.ToListAsync();
         }
 
+
+        //-----------------------------compare Now and Date of Item to determine expiration
         public Color CalculateExpiration(Item item)
         {
             DateTime now = DateTime.Now;

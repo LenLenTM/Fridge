@@ -6,7 +6,7 @@ namespace Fridge.Data
     {
         public static void Initializer(FridgeContext context)
         {
-            //check if database is not empty
+            //check if database is not empty. If empty initialize
             if (context.Item.Any())
             {
                 return;

@@ -1,11 +1,9 @@
 ﻿@page "/"
 @using Fridge.Models
 
-<PageTitle>Index</PageTitle>
+<PageTitle>FridgePlaner</PageTitle>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
+<h1 align="center">Your Fridge Items</h1>
 
 
 <button class="btn btn-primary" @onclick="ShowAddItem">Click me</button>
@@ -14,10 +12,10 @@ Welcome to your new app.
 
 @if (show)
 {
-    <NewItem />
+    <NewItem /> 
 }
 
-<ItemList />
+<ItemList /> <!-- List of all Fridge Items  -->
 
 @code {
 

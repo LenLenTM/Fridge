@@ -15,6 +15,7 @@ builder.Services.AddServerSideBlazor();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+//------------ With initialization of the interface we now get the repository
 builder.Services.AddScoped<IItem, ItemRepository>();
 
 var app = builder.Build();
