@@ -1,0 +1,32 @@
+﻿@page "/itemList"
+@using Models
+@using Repository
+@inject IItem ItemRepo
+
+@if(items == null){
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+      
+        <tbody>
+            @foreach (var item in items)
+            {
+                <ItemRow item="@item"/>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+@code {
+    private List<Item> items;
+
+    protected override async Task OnInitializedAsync()
+    {
+        items = await ItemRepo.GetItems();
+    }
+
+}

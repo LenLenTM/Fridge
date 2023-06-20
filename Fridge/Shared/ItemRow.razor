@@ -1,0 +1,29 @@
+﻿@using Models
+@using Repository
+@using System.Drawing
+@inject IItem ItemRepo
+
+<div class="row">
+
+    <div class="column">@item.Name</div>
+    <div class="column">@item.ExpirationDate.ToString("dd.MM.yyy")</div>
+    <div class="column">Edit</div>
+    <div class="column" id="circle" style="background-color:@myColor.Name;"></div>
+
+</div>
+<br>
+
+@code {
+
+    [Parameter]
+    public Item item { get; set; } = new Item();
+
+    Color myColor;
+
+    protected override void OnInitialized()
+    {
+        myColor = ItemRepo.CalculateExpiration(item);
+        System.Diagnostics.Debug.Print(myColor.Name.ToString());
+    }
+
+}

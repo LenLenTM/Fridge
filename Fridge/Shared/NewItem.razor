@@ -1,0 +1,23 @@
+﻿@page "/newitem"
+@using Models
+@using Repository
+
+<PageTitle>NewItem</PageTitle>
+
+<h1>Add a new item to your fridge</h1>
+
+<EditForm Model=@Item>
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <InputText @bind-Value=Item.Name class="form-control" id="Name" />
+    </div>
+    <div class="form-group">
+        <label for="ExpirationDate">Date</label>
+        <InputDate @bind-Value=Item.ExpirationDate class="form-control" id="Age" />
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save" />
+</EditForm>
+
+@code {
+    Item Item = new Item();
+}
