@@ -28,21 +28,23 @@
     private String inputName { get; set; }
     private DateOnly inputDate = DateOnly.FromDateTime(DateTime.Now.Date);
 
+    //from input convert DateOnly to DateTime, as this is the format the item needs.
+    // but we dont want to display hours and minutes, therefore in the UI we only use DateOnly
     private async Task ConvertInputs()
     {
-        if(Id == 0)
+        if(Id == 0) //create a new item when the index page set the parameter to 0
         {
             await AddItem(inputDate.ToDateTime(TimeOnly.Parse("00:00")));
             NavigationManager.NavigateTo("/", true);
         }
-        else if(Id != 0)
+        else if(Id != 0) //update an item when an item row sent an id parameter != 0
         {
             await UpdateItem(inputDate.ToDateTime(TimeOnly.Parse("00:00")));
             NavigationManager.NavigateTo("/", true);
         }
-
     }
 
+    //Call Repository Methodes to execute CrUd operations
     private async Task<String> AddItem(DateTime date)
     {
         return await ItemRepo.AddItem(new Item(Id, inputName, date));

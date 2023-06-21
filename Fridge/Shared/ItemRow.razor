@@ -61,6 +61,7 @@
         String iconWidth = "18%";
         String editColor = "#d1d1d1";
 
+    //Calculate state of each item and indicate it with a color.
     protected override void OnInitialized()
     {
         List<String> yield = ItemRepo.CalculateExpiration(item);
@@ -68,6 +69,7 @@
         indicatorComment = yield[1];
     }
 
+    //Delte Items
     private async Task PressDeleteItem()
     {
         if (!delete)
@@ -94,6 +96,7 @@
         deleteColor = "#d1d1d1";
     }
 
+    //call repository methode to delete item
     private async Task<String> DeleteItem(Item item)
     {
         return await ItemRepo.DeleteItem(item);
