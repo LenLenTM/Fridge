@@ -23,6 +23,26 @@ namespace Fridge.Repository
             return await _context.Item.ToListAsync();
         }
 
+        public async Task<String> AddItem(String name, DateTime date)
+        {
+            try
+            {
+                var items = new Item[]
+                {
+                    new Item{Name=name, ExpirationDate=date}
+                };
+                _context.Item.Add(items[0]);
+                await _context.SaveChangesAsync();
+                return "Item added";
+
+            }
+            catch (Exception ex)
+            {
+                return "Could not add item. " + ex;
+            }
+            
+        }
+
         public async Task<String> DeleteItem(Item item)
         { 
             try
@@ -45,15 +65,12 @@ namespace Fridge.Repository
 
             if (item.ExpirationDate.Date == now.Date)
             {
-                System.Diagnostics.Debug.Print("equal");
                 return new List<String> { Color.Moccasin.Name, "Just good" };
             }
             else if (item.ExpirationDate.Date < now.Date)
             {
-                System.Diagnostics.Debug.Print("smaller");
                 return new List<String> { Color.LightSalmon.Name, "Yuck" };
             }
-            System.Diagnostics.Debug.Print("greater");
             return new List<String> { Color.LightGreen.Name, "Yummy" };
         }
     }

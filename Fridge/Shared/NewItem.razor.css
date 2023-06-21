@@ -1,2 +1,40 @@
 ﻿body {
 }
+
+.field {
+    height: 15rem;
+    width: 40%;
+    position: relative;
+    left: 6%;
+    top: 1.7rem;
+    background-color: #e1e3e2;
+    border-radius: 1.9rem;
+}
+
+.form-control {
+    width:80%;
+    height: 3.2rem;
+    position: relative;
+    border-radius: 1.6rem;
+    left: 10%;
+    align-content: center;
+    text-align: center;
+}
+
+.btn {
+    position: relative;
+    left: 10%;
+    top: 1.3rem;;
+    height: 3.2rem;
+    width: 80%;
+    border-radius: 1.6rem;
+    background-color: #d1d1d1;
+    border: solid 0.1rem #d1d1d1;
+}
+
+.control-label {
+    font-size: 0.8rem;
+    transform: translate(-50%, 0);
+    position: relative;
+    left: 50%;
+}

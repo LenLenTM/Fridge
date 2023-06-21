@@ -9,6 +9,8 @@ namespace Fridge.Repository
 
         Task<String> DeleteItem(Item item);
 
+        Task<String> AddItem(String name, DateTime date);
+
         List<String> CalculateExpiration(Item item);
     }
 }
