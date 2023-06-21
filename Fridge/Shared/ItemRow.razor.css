@@ -4,35 +4,64 @@
 .column {
     float: left;
     width: 18%;
-   
-}
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-    align-content: center;
 }
 
 .row {
+    padding-left: 5%;
+    line-height: 2.6rem;
     position: absolute;
-    padding-top: 8px;
-    border: 2px solid gray;
-    height: 60px;
+    border: 0.2rem solid #e1e3e2;
+    height: 3.8rem; /*60px*/
     width: 80%;
     left: 10%;
-    border-radius: 30px;
+    border-radius: 1.9rem;
     text-align: center;
     background-color: #e1e3e2;
 }
 
-#circle {
-    height: 50px;
-    width: 50px;
-    border: 2px solid gray;
-    border-radius: 25px;
-    //position: absolute;
-    //right: 16px;
-    padding-bottom: 3px;
+#item {
+    font-size: 1.3rem;
+}
+
+#date {
+    padding-left: 8%;
+}
+
+#icon1, icon3 {
+    width: 10%;
+}
+
+#icon1 {
+    margin-left: 10%;
+}
+
+.circle {
+    height: 3.16rem;
+    width: 3.16rem;
+    border-radius: 1.58rem;
     transform: translate(0, -8.8%);
+    background-color: #d1d1d1;
+}
+
+#indicator {
+    line-height: 1.6rem;
+    margin-top: 0.48rem;
+    height: 3.16rem;
+    width: 9.4rem;
+    border-radius: 1.58rem;
+    transform: translate(0, -8.8%);
+    font-size: 1.1rem;
+}
+
+.expirationComment {
+    padding-top: 0.36rem;
+}
+
+.material-icons {
+    margin-top: 0.9rem;
+    color: #ebebeb;
+}
+
+.linespacer {
+    height: 4.5rem;
 }

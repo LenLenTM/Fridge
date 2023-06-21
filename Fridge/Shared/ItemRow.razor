@@ -2,30 +2,95 @@
 @using Repository
 @using System.Drawing
 @inject IItem ItemRepo
+@inject NavigationManager NavigationManager
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <div class="row">
 
-    <div class="column">@item.Name</div>
-    <div class="column">@item.ExpirationDate.ToString("dd.MM.yyy")</div>
-    <div class="column">Edit</div>
-    <div class="column" id="circle" style="background-color:@myColor.Name;"></div>
+    <div class="column" id="item" style="width:@columnWidth">@item.Name</div>
+    <div class="column" id="date" style="width:@columnWidth">@item.ExpirationDate.ToString("dd.MM.yyy")</div>
+    
+    <div class="column" id="icon1">
+        <div class="circle">
+            <i class="material-icons">settings</i>
+        </div>
+    </div>
+
+    <div class="column" id="icon2" style="width:@iconWidth">
+        <div class="circle" @onclick="PressDeleteItem" style="background-color:@deleteColor">
+            <i class="material-icons">@deleteIcon</i>
+        </div>
+    </div>
+
+    @if (delete)
+    {
+        <div class="column" id="icon3" style="width:10%">
+            <div class="circle" @onclick="StopDeleteItem" style="background-color:lightgreen">
+                <i class="material-icons">close</i>
+            </div>
+        </div>
+    }
+
+    <div class="column" id="indicator" style="background-color:@indicatorColor; width:@columnWidth">
+        <p class="expirationComment">@indicatorComment</p>
+    </div>
 
 </div>
-<br>
-<br>
-<br>
+<p class="linespacer"></p>
 
 @code {
 
     [Parameter]
     public Item item { get; set; } = new Item();
 
-    Color myColor;
+    String indicatorColor = "";
+    String indicatorComment = "";
+
+    String columnWidth = "18%";
+
+    Boolean delete = false;
+    String deleteColor = "#d1d1d1";
+    String deleteIcon = "delete";
+    String iconWidth = "18%";
 
     protected override void OnInitialized()
     {
-        myColor = ItemRepo.CalculateExpiration(item);
-        System.Diagnostics.Debug.Print(myColor.Name.ToString());
+        List<String> yield = ItemRepo.CalculateExpiration(item);
+        indicatorColor = yield[0];
+        indicatorComment = yield[1];
+    }
+
+    private async Task PressDeleteItem()
+    {
+        if (!delete)
+        {
+            deleteColor = "LightSalmon";
+            iconWidth = "10%";
+        }
+        else
+        {
+            System.Diagnostics.Debug.WriteLine("Here");
+            deleteColor = "#d1d1d1";
+            iconWidth = "18%";
+
+            await DeleteItem(item);
+            NavigationManager.NavigateTo("/", true);
+
+        }
+        delete = !delete;
+    }
+
+    private void StopDeleteItem()
+    {
+        delete = !delete;
+        iconWidth = "18%";
+        deleteColor = "#d1d1d1";
+    }
+
+    private async Task<String> DeleteItem(Item item)
+    {
+        return await ItemRepo.DeleteItem(item);
     }
 
 }

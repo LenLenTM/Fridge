@@ -6,6 +6,9 @@ namespace Fridge.Repository
     public interface IItem
     {
         Task<List<Item>> GetItems();
-        Color CalculateExpiration(Item item);
+
+        Task<String> DeleteItem(Item item);
+
+        List<String> CalculateExpiration(Item item);
     }
 }

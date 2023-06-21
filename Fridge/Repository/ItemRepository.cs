@@ -23,24 +23,38 @@ namespace Fridge.Repository
             return await _context.Item.ToListAsync();
         }
 
+        public async Task<String> DeleteItem(Item item)
+        { 
+            try
+            {
+                _context.Item.Remove(item);
+                await _context.SaveChangesAsync();
+                return "Deleted";
+            }
+            catch (Exception ex)
+            {
+                return "Could not delete. " + ex;
+            }
+        }
+
 
         //-----------------------------compare Now and Date of Item to determine expiration
-        public Color CalculateExpiration(Item item)
+        public List<String> CalculateExpiration(Item item)
         {
             DateTime now = DateTime.Now;
 
             if (item.ExpirationDate.Date == now.Date)
             {
                 System.Diagnostics.Debug.Print("equal");
-                return Color.Orange;
+                return new List<String> { Color.Moccasin.Name, "Just good" };
             }
             else if (item.ExpirationDate.Date < now.Date)
             {
                 System.Diagnostics.Debug.Print("smaller");
-                return Color.Tomato;
+                return new List<String> { Color.LightSalmon.Name, "Yuck" };
             }
             System.Diagnostics.Debug.Print("greater");
-            return Color.MediumSeaGreen;
+            return new List<String> { Color.LightGreen.Name, "Yummy" };
         }
     }
 

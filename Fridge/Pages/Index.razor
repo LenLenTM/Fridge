@@ -3,10 +3,22 @@
 
 <PageTitle>FridgePlaner</PageTitle>
 
-<h1 align="center">Your Fridge Items</h1>
+<p class="fridge">Your Fridge Items</p>
+
+<div class="row">
+    <div class="column">
+        <div class="plane">
+            Add item
+        </div>
+    </div>
+
+    <div class="circle" @onclick="ShowAddItem">
+        <i class="material-icons">@icon</i>
+    </div>
 
 
-<button class="btn btn-primary" @onclick="ShowAddItem">Click me</button>
+</div>
+
 <br>
 <br />
 
@@ -21,9 +33,18 @@
 
     private bool show = false;
     private Item item;
+    private String icon = "add";
 
     private void ShowAddItem()
     {
+        if (!show)
+        {
+            icon = "remove";
+        }
+        else
+        {
+            icon = "add";
+        }
         show = !show;
 
     }
