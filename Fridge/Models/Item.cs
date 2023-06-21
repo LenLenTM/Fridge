@@ -13,12 +13,6 @@
             ExpirationDate = expirationDate;
         }
 
-        public Item(string name, DateTime expirationDate)
-        {
-            Name = name;
-            ExpirationDate = expirationDate;
-        }
-
         public Item() { }
 
     }

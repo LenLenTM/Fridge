@@ -6,7 +6,7 @@ namespace Fridge.Data
     {
         public static void Initializer(FridgeContext context)
         {
-            //check if database is not empty. If empty initialize
+            //check if database is not empty. If empty fill database with saple data
             if (context.Item.Any())
             {
                 return;
