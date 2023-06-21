@@ -6,5 +6,20 @@
         public string Name { get; set; }
         public DateTime ExpirationDate { get; set; }
 
+        public Item(int id, string name, DateTime expirationDate)
+        {
+            Id = id;
+            Name = name;
+            ExpirationDate = expirationDate;
+        }
+
+        public Item(string name, DateTime expirationDate)
+        {
+            Name = name;
+            ExpirationDate = expirationDate;
+        }
+
+        public Item() { }
+
     }
 }

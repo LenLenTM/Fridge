@@ -12,7 +12,7 @@
     <div class="column" id="date" style="width:@columnWidth">@item.ExpirationDate.ToString("dd.MM.yyy")</div>
     
     <div class="column" id="icon1">
-        <div class="circle">
+        <div class="circle" @onclick="ToggleEdit" style="background-color:@editColor">
             <i class="material-icons">settings</i>
         </div>
     </div>
@@ -39,20 +39,27 @@
 </div>
 <p class="linespacer"></p>
 
+@if(edit){
+    <NewItem Id="item.Id"/>
+    <p class="linespacer"></p>
+}
+
 @code {
 
-    [Parameter]
-    public Item item { get; set; } = new Item();
+        [Parameter]
+        public Item item { get; set; } = new Item();
 
-    String indicatorColor = "";
-    String indicatorComment = "";
+        String indicatorColor = "";
+        String indicatorComment = "";
 
-    String columnWidth = "18%";
+        String columnWidth = "18%";
 
-    Boolean delete = false;
-    String deleteColor = "#d1d1d1";
-    String deleteIcon = "delete";
-    String iconWidth = "18%";
+        Boolean edit = false;
+        Boolean delete = false;
+        String deleteColor = "#d1d1d1";
+        String deleteIcon = "delete";
+        String iconWidth = "18%";
+        String editColor = "#d1d1d1";
 
     protected override void OnInitialized()
     {
@@ -90,6 +97,19 @@
     private async Task<String> DeleteItem(Item item)
     {
         return await ItemRepo.DeleteItem(item);
+    }
+
+    private void ToggleEdit()
+    {
+        edit = !edit;
+        if (edit)
+        {
+            editColor = "#bfbfbf";
+        }
+        else
+        {
+            editColor = "#d1d1d1";
+        }
     }
 
 }

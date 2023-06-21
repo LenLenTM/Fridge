@@ -22,18 +22,36 @@
 </div>
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
 
     private String inputName { get; set; }
     private DateOnly inputDate = DateOnly.FromDateTime(DateTime.Now.Date);
 
     private async Task ConvertInputs()
     {
-        await AddItem(inputDate.ToDateTime(TimeOnly.Parse("00:00")));
-        NavigationManager.NavigateTo("/", true);
+        if(Id == 0)
+        {
+            await AddItem(inputDate.ToDateTime(TimeOnly.Parse("00:00")));
+            NavigationManager.NavigateTo("/", true);
+        }
+        else if(Id != 0)
+        {
+            await UpdateItem(inputDate.ToDateTime(TimeOnly.Parse("00:00")));
+            NavigationManager.NavigateTo("/", true);
+        }
+
     }
 
     private async Task<String> AddItem(DateTime date)
     {
-        return await ItemRepo.AddItem(inputName, date);
+        return await ItemRepo.AddItem(new Item(Id, inputName, date));
     }
+
+    private async Task<String> UpdateItem(DateTime date)
+    {
+        return await ItemRepo.UpdateItem(Id, inputName, date);
+    }
+
+    
 }

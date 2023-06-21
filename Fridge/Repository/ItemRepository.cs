@@ -23,22 +23,35 @@ namespace Fridge.Repository
             return await _context.Item.ToListAsync();
         }
 
-        public async Task<String> AddItem(String name, DateTime date)
+        public async Task<String> AddItem(Item item)
         {
             try
             {
-                var items = new Item[]
-                {
-                    new Item{Name=name, ExpirationDate=date}
-                };
-                _context.Item.Add(items[0]);
+                _context.Item.Add(item);
                 await _context.SaveChangesAsync();
                 return "Item added";
 
             }
             catch (Exception ex)
             {
-                return "Could not add item. " + ex;
+                return "Could not add item. " + ex.Message;
+            }
+            
+        }
+
+        public async Task<String> UpdateItem(int id, String name, DateTime date)
+        {
+            var entity = _context.Item.Find(id);
+            _context.Item.Entry(entity).CurrentValues.SetValues(new Item(id, name, date));
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return "Item updated";
+            }
+            catch (Exception ex)
+            {
+                return "Could not update. " + ex.Message;
             }
             
         }
@@ -53,7 +66,7 @@ namespace Fridge.Repository
             }
             catch (Exception ex)
             {
-                return "Could not delete. " + ex;
+                return "Could not delete. " + ex.Message;
             }
         }
 
